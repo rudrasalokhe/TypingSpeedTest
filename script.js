@@ -1,15 +1,23 @@
+// Get elements for login and typing test
 const typingText = document.querySelector('.typing-text p');
 const input = document.querySelector('.input-field');
-const time = document.querySelector('.time span b');
+const time = document.querySelector('.time b');
 const mistakes = document.querySelector('.mistake span');
 const wpm = document.querySelector('.wpm span');
 const cpm = document.querySelector('.cpm span');
-const btn = document.querySelector('button');
+const btn = document.querySelector('.btn');
 const resultScreen = document.querySelector('.result');
 const resultWpm = document.querySelector('#result-wpm');
 const resultCpm = document.querySelector('#result-cpm');
 const resultMistakes = document.querySelector('#result-mistakes');
 const restartBtn = document.querySelector('#restart-btn');
+
+// Get elements for login form
+const loginWrapper = document.querySelector('.login-wrapper');
+const loginForm = document.getElementById('login-form');
+const usernameInput = document.getElementById('username');
+const passwordInput = document.getElementById('password');
+const errorMessage = document.getElementById('error-message');
 
 let timer;
 let maxTime = 15; 
@@ -17,7 +25,13 @@ let timeLeft = maxTime;
 let charIndex = 0;
 let mistake = 0;
 let isTyping = false;
+let isLoggedIn = false; // New variable to track login status
 
+// Dummy credentials for login
+const validUsername = 'user';
+const validPassword = 'password';
+
+// Load the typing text paragraph
 function loadParagraph() {
     const paragraphs = [
         "In the digital age, effective communication is paramount. The ability to type swiftly and accurately enhances productivity in various fields. Mastering typing skills can significantly improve one's professional and personal life.",
@@ -37,17 +51,18 @@ function loadParagraph() {
     typingText.addEventListener("click", () => input.focus());
 }
 
+// Start typing and calculate WPM, CPM, and mistakes
 function initTyping() {
     const char = typingText.querySelectorAll('span');
     const typedChar = input.value.charAt(charIndex);
 
     if (charIndex < char.length && timeLeft > 0) {
-        if(!isTyping) {
+        if (!isTyping) {
             timer = setInterval(initTime, 1000);
             isTyping = true;
         }
 
-        if(typedChar) {
+        if (typedChar) {
             if (char[charIndex].innerText === typedChar) {
                 char[charIndex].classList.add('correct');
             } else {
@@ -60,7 +75,7 @@ function initTyping() {
         if (charIndex < char.length) {
             char[charIndex].classList.add('active');
         }
-        
+
         mistakes.innerText = mistake;
         cpm.innerText = charIndex - mistake;
     }
@@ -72,6 +87,7 @@ function initTyping() {
     }
 }
 
+// Update time countdown and WPM
 function initTime() {
     if (timeLeft > 0) {
         timeLeft--;
@@ -85,6 +101,7 @@ function initTime() {
     }
 }
 
+// Display results after typing test
 function showResult() {
     document.querySelector('.content-box').style.display = 'none';
     resultScreen.style.display = 'block';
@@ -93,6 +110,7 @@ function showResult() {
     resultMistakes.innerHTML = `<b>Mistakes:</b> ${mistakes.innerText}`;
 }
 
+// Reset typing test for a new round
 function reset() {
     loadParagraph();
     clearInterval(timer);
@@ -109,8 +127,28 @@ function reset() {
     resultScreen.style.display = 'none';
 }
 
+// Handle login form submission
+loginForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = usernameInput.value;
+    const password = passwordInput.value;
+
+    if (username === validUsername && password === validPassword) {
+        // Successful login
+        isLoggedIn = true;
+        loginWrapper.style.display = 'none'; // Hide login form
+        document.querySelector('.typing-wrapper').style.display = 'block'; // Show typing test
+        loadParagraph(); // Load the typing paragraph after login
+    } else {
+        // Display error message if login fails
+        errorMessage.style.display = 'block';
+    }
+});
+
+// Event listeners for typing test actions
 input.addEventListener("input", initTyping);
 btn.addEventListener("click", reset);
 restartBtn.addEventListener("click", reset);
 
-loadParagraph();
+// Hide typing test initially
+document.querySelector('.typing-wrapper').style.display = 'none';
