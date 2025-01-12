@@ -7,23 +7,43 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Login Form -->
     <div class="login-wrapper">
         <h2>Login</h2>
         <form id="login-form">
             <div class="input-group">
-                <label for="username">Username</label>
-                <input type="text" id="username" placeholder="Enter username" required>
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Enter username" required>
             </div>
             <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Enter password" required>
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter password" required>
             </div>
-            <p id="error-message" style="display: none; color: red;">Invalid credentials, please try again.</p>
+            <p id="login-error-message" style="display: none; color: red;">Invalid credentials, please try again.</p>
             <button type="submit">Login</button>
         </form>
+        <p>Don't have an account? <a href="#" id="register-link">Register here</a></p>
     </div>
-
-    <div class="typing-wrapper">
+    
+    <!-- Registration Form -->
+    <div class="register-wrapper" style="display: none;">
+        <h2>Register</h2>
+        <form id="register-form">
+            <div class="input-group">
+                <label for="register-username">Username</label>
+                <input type="text" id="register-username" placeholder="Enter username" required>
+            </div>
+            <div class="input-group">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" placeholder="Enter password" required>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <a href="#" id="login-link">Login here</a></p>
+    </div>
+    
+    <!-- Typing Test Form -->
+    <div class="typing-wrapper" style="display: none;">
         <div class="content-box">
             <div class="typing-text">
                 <p></p>

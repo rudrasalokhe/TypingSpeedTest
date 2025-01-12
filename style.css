@@ -1,3 +1,4 @@
+/* Reset and basic styling */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +14,9 @@ body {
   background-color: #f5f5f5;
 }
 
+/* Wrapper styling for Login, Register, and Typing Test */
 .login-wrapper,
+.register-wrapper,
 .typing-wrapper {
   display: none;
   width: 80%;
@@ -25,16 +28,24 @@ body {
   text-align: center;
 }
 
-.login-wrapper {
-  display: block;
-}
-
+/* Title for forms */
 h2 {
   margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
 }
 
+/* Input fields */
 .input-group {
   margin: 15px 0;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
 }
 
 input {
@@ -43,8 +54,15 @@ input {
   margin-top: 5px;
   border-radius: 5px;
   border: 1px solid #ccc;
+  font-size: 16px;
 }
 
+input:focus {
+  border-color: #4CAF50;
+  outline: none;
+}
+
+/* Button styling */
 button {
   padding: 10px 20px;
   border-radius: 5px;
@@ -53,12 +71,32 @@ button {
   color: white;
   font-size: 16px;
   cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
 }
 
 button:hover {
   background-color: #45a049;
 }
 
+/* Links for switching between forms */
+a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+/* Error message */
+#error-message {
+  margin-top: 10px;
+  font-size: 14px;
+  color: red;
+}
+
+/* Typing Test Section */
 .typing-wrapper {
   display: none;
 }
@@ -105,4 +143,43 @@ button:hover {
 
 #restart-btn:hover {
   background-color: #e64a19;
+}
+
+/* Additional Form styling */
+.login-wrapper, .register-wrapper {
+  max-width: 500px;
+}
+
+.register-wrapper {
+  display: none;
+}
+
+.register-wrapper h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.register-wrapper .input-group {
+  margin-bottom: 20px;
+}
+
+.register-wrapper button {
+  background-color: #007bff;
+}
+
+.register-wrapper button:hover {
+  background-color: #0056b3;
+}
+
+.register-wrapper p {
+  margin-top: 10px;
+  color: #555;
+}
+
+.register-wrapper p a {
+  color: #007bff;
+}
+
+.register-wrapper p a:hover {
+  color: #0056b3;
 }

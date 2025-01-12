@@ -1,4 +1,4 @@
-// Get elements for login and typing test
+// Get elements for login, registration, and typing test
 const typingText = document.querySelector('.typing-text p');
 const input = document.querySelector('.input-field');
 const time = document.querySelector('.time b');
@@ -12,22 +12,25 @@ const resultCpm = document.querySelector('#result-cpm');
 const resultMistakes = document.querySelector('#result-mistakes');
 const restartBtn = document.querySelector('#restart-btn');
 
-// Get elements for login form
+// Get elements for login and registration forms
 const loginWrapper = document.querySelector('.login-wrapper');
+const registerWrapper = document.querySelector('.register-wrapper');
 const loginForm = document.getElementById('login-form');
+const registerForm = document.getElementById('register-form');
 const usernameInput = document.getElementById('username');
 const passwordInput = document.getElementById('password');
 const errorMessage = document.getElementById('error-message');
 
+// Variables for the typing test logic
 let timer;
-let maxTime = 15; 
+let maxTime = 15; // 15 seconds for the typing test
 let timeLeft = maxTime;
 let charIndex = 0;
 let mistake = 0;
 let isTyping = false;
-let isLoggedIn = false; // New variable to track login status
+let isLoggedIn = false; // Track login status
 
-// Dummy credentials for login
+// Dummy credentials for login (you can replace with your backend logic)
 const validUsername = 'user';
 const validPassword = 'password';
 
@@ -150,5 +153,28 @@ input.addEventListener("input", initTyping);
 btn.addEventListener("click", reset);
 restartBtn.addEventListener("click", reset);
 
+// Event listeners for toggling login and register forms
+document.getElementById('register-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    loginWrapper.style.display = 'none';
+    registerWrapper.style.display = 'block';
+});
+
+document.getElementById('login-link').addEventListener('click', function(event) {
+    event.preventDefault();
+    registerWrapper.style.display = 'none';
+    loginWrapper.style.display = 'block';
+});
+
+// Handle registration form submission (simplified)
+registerForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const username = document.getElementById('register-username').value;
+    const password = document.getElementById('register-password').value;
+    alert('Registration successful! You can now log in.');
+    registerWrapper.style.display = 'none'; // Hide registration form
+    loginWrapper.style.display = 'block'; // Show login form
+});
+
 // Hide typing test initially
-document.querySelector('.typing-wrapper').style.display = 'none';
+document.querySelector('.typing-wrapper').style.display = 'none';  // Ensure typing test is hidden at first
